@@ -47,12 +47,20 @@ class App extends Component {
   deleteCard = (id, listId) => {
     console.log(`I am going to delete ${id} from ${listId}`);
     console.dir(`state : ${this.state.lists[listId - 1].cardIds.find( (letter) => letter === id) }`);
-    
-    // this.setState({
-    //   lists[listId -1].cardIds: '';
-    // })
 
-    
+    const updatedLists = [...this.state.lists];
+    for (let i=0; i<updatedLists.length; i++) {
+      if (updatedLists[i].id === listId) {
+        updatedLists[i].cardIds = updatedLists[i].cardIds.filter((cardId) => cardId !== id)
+        break;
+      }
+    }
+
+    this.setState({
+      lists: updatedLists
+      //lists: [ ...this.state.lists, this.state.lists[listId-1] = { ...this.state.lists[listId - 1], cardIds: this.state.lists[listId - 1].cardIds.filter((cardId) => cardId !== id) } ],   
+      //lists: [...this.state.lists = this.state.lists[listId - 1].cardIds.filter((cardId) => cardId !== id)]
+    })
     // this.state.lists[listId].cardIds.filter((removeId) => {
     //   return (removeId === id)
     // })
@@ -81,3 +89,5 @@ class App extends Component {
 }
 
 export default App;
+
+
