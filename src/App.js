@@ -43,11 +43,18 @@ class App extends Component {
       'm': { id: 'm', title: 'Thirteenth card', content: 'lorem ipsum' },
     },
   } 
-
+  //testId = state.lists.id;
   deleteCard = (id, listId) => {
     console.log(`I am going to delete ${id} from ${listId}`);
-    // this.state.lists[event.currentTarget.listIndex].cardIds.filter((id) => {
-    //   return id === event.currentTarget.id
+    console.dir(`state : ${this.state.lists[listId - 1].cardIds.find( (letter) => letter === id) }`);
+    
+    // this.setState({
+    //   lists[listId -1].cardIds: '';
+    // })
+
+    
+    // this.state.lists[listId].cardIds.filter((removeId) => {
+    //   return (removeId === id)
     // })
   }
 
