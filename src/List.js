@@ -3,6 +3,7 @@ import Card from './Card'
 import './List.css';
 
 export default function List(props) {
+
   return (
     <section className='List'>
       <header className='List-header'>
@@ -14,6 +15,9 @@ export default function List(props) {
             key={card.id}
             title={card.title}
             content={card.content}
+            id={card.id}
+            listId={props.listId}
+            deleteCard = {props.deleteCard}
           />
         )}
         <button
