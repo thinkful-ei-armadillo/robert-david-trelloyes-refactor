@@ -45,10 +45,7 @@ class App extends Component {
   } 
   //testId = state.lists.id;
   deleteCard = (id, listId) => {
-    console.log(`I am going to delete ${id} from ${listId}`);
-    console.dir(`state : ${this.state.lists[listId - 1].cardIds.find( (letter) => letter === id) }`);
-
-    const updatedLists = [...this.state.lists];
+      const updatedLists = [...this.state.lists];
     for (let i=0; i<updatedLists.length; i++) {
       if (updatedLists[i].id === listId) {
         updatedLists[i].cardIds = updatedLists[i].cardIds.filter((cardId) => cardId !== id)
@@ -66,6 +63,43 @@ class App extends Component {
     // })
   }
 
+  addRandomCard = (listId) => {
+    const newRandomCard = () => {
+      const id = Math.random().toString(36).substring(2, 4)
+        + Math.random().toString(36).substring(2, 4);
+      return {
+        id,
+        title: `Random Card ${id}`,
+        content: 'lorem ipsum',
+      }
+    }
+
+    const randomCard = newRandomCard();
+    const randomCardId = randomCard.id
+    console.log(`saved card id is ${randomCard.id}`);
+
+    const updatedLists = [...this.state.lists];
+      for(let i = 0; i < updatedLists.length; i++) {
+        if (updatedLists[i].id === listId) {
+          console.log(newRandomCard);
+          console.log(newRandomCard().id);
+          updatedLists[i].cardIds.push(randomCard.id);
+        }
+      }
+
+    // const updatedCards = {...this.state.allCards, };
+      this.state.allCards[randomCardId] = randomCard
+      
+
+
+
+    this.setState({
+      list: updatedLists
+    })
+
+
+  }
+
   render() {
     return (
       <main className='App'>
@@ -79,6 +113,7 @@ class App extends Component {
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
               deleteCard = {this.deleteCard}
+              addRandomCard = {this.addRandomCard}
               listId={list.id}
             />
           ))}
